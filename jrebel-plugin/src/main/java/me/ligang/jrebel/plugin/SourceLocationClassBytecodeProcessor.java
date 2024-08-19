@@ -27,8 +27,6 @@ public class SourceLocationClassBytecodeProcessor extends JavassistClassBytecode
             return;
         }
 
-        logger.info("Processing class: " + ctClass.getName());
-
         String sourceFilePath = getSourceFilePath(cl, ctClass);
         if (sourceFilePath == null) {
             return;
@@ -69,7 +67,11 @@ public class SourceLocationClassBytecodeProcessor extends JavassistClassBytecode
             return null;
         }
         String classPath = classUrl.getPath();
-        String projectRoot = classPath.substring(0, classPath.indexOf("/target/classes/"));
+        int index = classPath.indexOf("/target/classes/");
+        if (index == -1) {
+            return null;
+        }
+        String projectRoot = classPath.substring(0, index);
         return projectRoot.replaceAll("^/", "") + "/src/main/java/" + ctClass.getName().replace('.', '/') + ".java";
     }
 

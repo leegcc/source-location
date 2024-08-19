@@ -1,10 +1,6 @@
 package me.ligang.jrebel.plugin;
 
-import com.sun.net.httpserver.HttpServer;
 import org.zeroturnaround.javarebel.*;
-
-import java.io.IOException;
-import java.net.InetSocketAddress;
 
 public class SourceLocationPlugin implements Plugin {
 
