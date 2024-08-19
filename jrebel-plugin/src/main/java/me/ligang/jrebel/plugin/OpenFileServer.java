@@ -36,7 +36,10 @@ public class OpenFileServer implements HttpHandler {
         executeCommand(command);
 
         String response = "File opened in IntelliJ IDEA";
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET");
         exchange.sendResponseHeaders(200, response.getBytes().length);
+
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(response.getBytes());
         }
